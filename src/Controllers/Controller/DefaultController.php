@@ -7,24 +7,22 @@ use Zend\View\Model\ViewModel;
 
 class DefaultController extends AbstractController
 {
-    private $_entity = '';
-    private $_searchMethod = 'findAll';
-    private $_searchParams = array();
-    private $_form = '';
-    private $_failRoute = 'home';
-    private $_addTitle = 'Add item';
-    private $_updateTitle = 'Update item';
-    private $_deleteTitle = 'Delete item';
-    private $_deleteDisplyaProperty = 'name';
-    private $_formView = 'controllers/standart/form';
-    private $_deleteView = 'controllers/standart/delete_dialog';
-    
+    protected $_entity = '';
+    protected $_searchParams = array();
+    protected $_form = '';
+    protected $_failRoute = '';
+    protected $_addTitle = 'Add item';
+    protected $_updateTitle = 'Update item';
+    protected $_deleteTitle = 'Delete item';
+    protected $_deleteDisplyaProperty = 'name';
+    protected $_formView = 'controllers/standart/form';
+    protected $_deleteView = 'controllers/standart/delete_dialog';
 
     public function indexAction()
     {
         $items = $this->getEntityManager()
                 ->getRepository($this->_entity)
-                ->$this->_searchMethod($this->_searchParams);
+                ->findBy($this->_searchParams);
 
         return new ViewModel(array(
             'items' => $items,
