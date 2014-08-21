@@ -7,11 +7,11 @@ use Zend\View\Model\ViewModel;
 
 class DefaultController extends AbstractController
 {
-    private $_entity = '\Core\Entity\Campaign\Browser';
+    private $_entity = '';
     private $_searchMethod = 'findAll';
     private $_searchParams = array();
-    private $_form = '\Admin\Form\Campaign\CreateBrowser';
-    private $_failRoute = 'admin/setup/browser';
+    private $_form = '';
+    private $_failRoute = 'home';
     private $_addTitle = 'Add item';
     private $_updateTitle = 'Update item';
     private $_deleteTitle = 'Delete item';
