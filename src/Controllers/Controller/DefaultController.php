@@ -18,6 +18,13 @@ class DefaultController extends AbstractController
     protected $_deleteDisplyaProperty = 'name';
     protected $_formView = 'controllers/standart/form';
     protected $_deleteView = 'controllers/standart/delete_dialog';
+    
+    protected function _preCreate($entity){}
+    protected function _postCreate($entity){}
+    protected function _preUpdate($entity){}
+    protected function _postUpdate($entity){}
+    protected function _preDelete($entity){}
+    protected function _postDelete($entity){}    
 
     public function indexAction()
     {
