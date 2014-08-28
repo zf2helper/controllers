@@ -1,0 +1,31 @@
+<?php
+$this->headTitle($title);
+?>
+<a href="<?=$this->url($route, array('action' => 'add'))?>">Add project</a>
+<div class="row">
+    <div class="col-lg-8">
+        <h3><?=$this->translate('List')?></h3>
+        <table class="table">
+            <tr>
+                <th><?=$this->translate('Name')?></th>
+                <th></th>
+            </tr>
+            <?php foreach ($items as $i):?>
+            <tr>
+                <td><?=$i->getName()?></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?=$this->url($route, array('action' => 'update', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-edit"></i> <?=$this->translate('Update')?></a></li>
+                            <li><a href="<?=$this->url($route, array('action' => 'delete', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-trash"></i> <?=$this->translate('Delete')?></a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

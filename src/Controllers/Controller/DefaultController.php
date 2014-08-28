@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class DefaultController extends AbstractController
 {
+    protected $_title = 'Title';
     protected $_entity = '';
     protected $_searchParams = array();
     protected $_form = '';
@@ -25,6 +26,7 @@ class DefaultController extends AbstractController
                 ->findBy($this->_searchParams);
 
         return new ViewModel(array(
+            'title' => $this->_title,
             'items' => $items,
             'route' => $this->_failRoute
         ));
@@ -83,6 +85,8 @@ class DefaultController extends AbstractController
                 return $this->redirect()->toRoute($this->_failRoute);
             }
         }
+        
+        $form->get('submit')->setValue($this->_updateTitle);
 
         $view = new ViewModel(array(
             'form' => $form,
