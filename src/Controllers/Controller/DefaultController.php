@@ -42,8 +42,14 @@ class DefaultController extends AbstractController
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                $this->_preCreate($item);
                 $this->getEntityManager()->persist($item);
                 $this->getEntityManager()->flush();
+                $this->_postCreate($item);
+                
+                if ($this->_postCreate){
+                    $this->$this->_postCreate();
+                }     
 
                 return $this->redirect()->toRoute($this->_failRoute);
             }
@@ -76,17 +82,18 @@ class DefaultController extends AbstractController
 
         $form = new $this->_form($this->getEntityManager());
         $form->bind($item);
+        $form->get('submit')->setValue($this->_updateTitle);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                $this->_preUpdate($item);
                 $this->getEntityManager()->flush();
+                $this->_postUpdate($item);
                 return $this->redirect()->toRoute($this->_failRoute);
             }
         }
-        
-        $form->get('submit')->setValue($this->_updateTitle);
 
         $view = new ViewModel(array(
             'form' => $form,
@@ -117,8 +124,10 @@ class DefaultController extends AbstractController
             $del = $request->getPost('del', 'No');
 
             if ($del == 'Yes') {
+                $this->_preDelete($item);
                 $this->getEntityManager()->remove($item);
                 $this->getEntityManager()->flush();
+                $this->_postDelete($item);
             }
 
             return $this->redirect()->toRoute($this->_failRoute);
