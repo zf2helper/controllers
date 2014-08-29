@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class DefaultController extends AbstractController
 {
+
     protected $_title = 'Title';
     protected $_entity = '';
     protected $_searchParams = array();
@@ -18,16 +19,51 @@ class DefaultController extends AbstractController
     protected $_deleteDisplyaProperty = 'name';
     protected $_formView = 'controllers/standart/form';
     protected $_deleteView = 'controllers/standart/delete_dialog';
-    
-    protected function _preCreate($entity){}
-    protected function _postCreate($entity){}
-    protected function _preUpdate($entity){}
-    protected function _postUpdate($entity){}
-    protected function _preDelete($entity){}
-    protected function _postDelete($entity){}    
+
+    protected function _preSearchParams($params)
+    {
+
+    }
+
+    protected function _preCreate($entity)
+    {
+
+    }
+
+    protected function _postCreate($entity)
+    {
+
+    }
+
+    protected function _preUpdate($entity)
+    {
+
+    }
+
+    protected function _postUpdate($entity)
+    {
+
+    }
+
+    protected function _preDelete($entity)
+    {
+
+    }
+
+    protected function _postDelete($entity)
+    {
+
+    }
+
+    protected function _redirectBack()
+    {
+        return $this->redirect()->toRoute($this->_failRoute);
+    }
 
     public function indexAction()
     {
+        $this->_preSearchParams($this->_searchParams);
+
         $items = $this->getEntityManager()
                 ->getRepository($this->_entity)
                 ->findBy($this->_searchParams);
@@ -54,8 +90,8 @@ class DefaultController extends AbstractController
                 $this->getEntityManager()->persist($item);
                 $this->getEntityManager()->flush();
                 $this->_postCreate($item);
-                
-                return $this->redirect()->toRoute($this->_failRoute);
+
+                return $this->_redirectBack();
             }
         }
 
@@ -73,7 +109,7 @@ class DefaultController extends AbstractController
         $id = $this->params()->fromRoute('id', false);
 
         if (!$id) {
-            return $this->redirect()->toRoute($this->_failRoute);
+            return $this->_redirectBack();
         }
 
         try {
@@ -81,7 +117,7 @@ class DefaultController extends AbstractController
                     ->getRepository($this->_entity)
                     ->find($id);
         } catch (\Exception $ex) {
-            return $this->redirect()->toRoute($this->_failRoute);
+            return $this->_redirectBack();
         }
 
         $form = new $this->_form($this->getEntityManager());
@@ -95,7 +131,7 @@ class DefaultController extends AbstractController
                 $this->_preUpdate($item);
                 $this->getEntityManager()->flush();
                 $this->_postUpdate($item);
-                return $this->redirect()->toRoute($this->_failRoute);
+                return $this->_redirectBack();
             }
         }
 
@@ -112,7 +148,7 @@ class DefaultController extends AbstractController
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
-            return $this->redirect()->toRoute($this->_failRoute);
+            return $this->_redirectBack();
         }
 
         try {
@@ -120,7 +156,7 @@ class DefaultController extends AbstractController
                     ->getRepository($this->_entity)
                     ->find($id);
         } catch (\Exception $ex) {
-            return $this->redirect()->toRoute($this->_failRoute);
+            return $this->_redirectBack();
         }
 
         $request = $this->getRequest();
@@ -134,7 +170,7 @@ class DefaultController extends AbstractController
                 $this->_postDelete($item);
             }
 
-            return $this->redirect()->toRoute($this->_failRoute);
+            return $this->_redirectBack();
         }
 
         $view = new ViewModel(array(
