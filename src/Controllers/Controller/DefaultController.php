@@ -55,10 +55,6 @@ class DefaultController extends AbstractController
                 $this->getEntityManager()->flush();
                 $this->_postCreate($item);
                 
-                if ($this->_postCreate){
-                    $this->$this->_postCreate();
-                }     
-
                 return $this->redirect()->toRoute($this->_failRoute);
             }
         }
