@@ -33,6 +33,7 @@ class DefaultController extends AbstractController
                 ->findBy($this->_searchParams);
 
         return new ViewModel(array(
+            'addLabel' => $this->_addTitle,
             'title' => $this->_title,
             'items' => $items,
             'route' => $this->_failRoute
