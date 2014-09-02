@@ -1,7 +1,7 @@
 <?php
 $this->headTitle($title);
 ?>
-<a href="<?=$this->url($route, array('action' => 'add'))?>">Add project</a>
+<a href="<?=$this->url($route, array('action' => 'add'))?>"><?=$addLabel?></a>
 <div class="row">
     <div class="col-lg-8">
         <h3><?=$this->translate('List')?></h3>
@@ -16,7 +16,7 @@ $this->headTitle($title);
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Action <span class="caret"></span>
+                            <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;<?=$this->translate('Actions')?> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="<?=$this->url($route, array('action' => 'update', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-edit"></i> <?=$this->translate('Update')?></a></li>
