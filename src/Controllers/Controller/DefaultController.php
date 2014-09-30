@@ -69,7 +69,7 @@ class DefaultController extends AbstractController
     {
         return $this->redirect()->toRoute($this->_failRoute);
     }
-
+    
     public function indexAction()
     {
         $this->_preSearchParams($this->_searchParams);

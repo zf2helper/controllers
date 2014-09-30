@@ -2,7 +2,7 @@
 
 namespace Controllers\Controller;
 
-abstract class AbstractController extends \Zend\Mvc\Controller\AbstractActionController
+abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionController
 {
     /**
      * Get base host uri from request
