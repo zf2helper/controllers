@@ -2,10 +2,10 @@
 
 namespace Controllers\Controller;
 
-use Controllers\Controller\AbstractController;
+use Controllers\Controller\SimpleController;
 use Zend\View\Model\ViewModel;
 
-class DefaultController extends AbstractController
+class DefaultController extends SimpleController
 {
 
     protected $_title = 'Title';
