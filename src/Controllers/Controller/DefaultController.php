@@ -173,9 +173,9 @@ class DefaultController extends SimpleController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $del = $request->getPost('del', 'No');
+            $del = $request->getPost('delete', false);
 
-            if ($del == 'Yes') {
+            if ($del) {
                 $this->_preDeleteItem($item);
                 $this->getEntityManager()->remove($item);
                 $this->getEntityManager()->flush();
