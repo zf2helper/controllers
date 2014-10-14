@@ -16,8 +16,13 @@ class DefaultAnnotationController extends SimpleController
     protected $_updateTitle = 'Update item';
     protected $_deleteTitle = 'Delete item';
     protected $_deleteDisplyaProperty = 'name';
+    protected $_indexView = 'controllers/standart/index';
     protected $_formView = 'controllers/standart/form';
     protected $_deleteView = 'controllers/standart/delete_dialog';
+    protected $_indexViewFields = array(
+        'name' => 'Name'
+    );
+    
 
     protected function _preSearchParams($params)
     {
@@ -77,12 +82,16 @@ class DefaultAnnotationController extends SimpleController
                 ->getRepository($this->_entity)
                 ->findBy($this->_searchParams);
 
-        return new ViewModel(array(
+        $view = new ViewModel(array(
             'addLabel' => $this->_addTitle,
             'title' => $this->_title,
             'items' => $items,
-            'route' => $this->_failRoute
+            'route' => $this->_failRoute,
+            'fields' => $this->_indexViewFields
         ));
+        $view->setTemplate($this->_indexView);
+        
+        return $view;
     }
 
     public function addAction()

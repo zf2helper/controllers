@@ -7,12 +7,19 @@ $this->headTitle($title);
         <h3><?=$this->translate('List')?></h3>
         <table class="table">
             <tr>
-                <th><?=$this->translate('Name')?></th>
+                <?php foreach ($fields as $fieldName => $fieldLabel):?>
+                <th><?=$this->translate($fieldLabel)?></th>
+                <?php endforeach;?>
                 <th></th>
             </tr>
             <?php foreach ($items as $i):?>
             <tr>
-                <td><?=$i->getName()?></td>
+                <?php foreach ($fields as $fieldName => $fieldLabel):?>
+                <td><?php
+                    $getter = 'get' . ucfirst($fieldName);
+                    echo $i->$getter();
+                ?></td>
+                <?php endforeach;?>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
