@@ -17,6 +17,7 @@ class DefaultController extends SimpleController
     protected $_updateTitle = 'Update item';
     protected $_deleteTitle = 'Delete item';
     protected $_deleteDisplyaProperty = 'name';
+    protected $_indexView = 'controllers/standart/index';
     protected $_formView = 'controllers/standart/form';
     protected $_deleteView = 'controllers/standart/delete_dialog';
     protected $_indexViewFields = array(
