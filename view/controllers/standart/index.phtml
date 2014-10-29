@@ -5,13 +5,16 @@ $this->headTitle($title);
 <div class="row">
     <div class="col-lg-8">
         <h3><?=$this->translate('List')?></h3>
-        <table class="table">
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <?php foreach ($fields as $fieldName => $fieldLabel):?>
                 <th><?=$this->translate($fieldLabel)?></th>
                 <?php endforeach;?>
                 <th></th>
             </tr>
+            </thead>
+            <tbody>
             <?php foreach ($items as $i):?>
             <tr>
                 <?php foreach ($fields as $fieldName => $fieldLabel):?>
@@ -33,6 +36,7 @@ $this->headTitle($title);
                 </td>
             </tr>
             <?php endforeach; ?>
+            </tbody>
         </table>
     </div>
 </div>
