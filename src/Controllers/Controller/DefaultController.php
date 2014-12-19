@@ -100,12 +100,12 @@ class DefaultController extends SimpleController
         $form = new $this->_form($this->getEntityManager());
         $form->bind($item);
         $this->_preCreateForm($form);
+        $this->_preCreateItem($item);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->_preCreateItem($item);
                 $this->getEntityManager()->persist($item);
                 $this->getEntityManager()->flush();
                 $this->_postCreateItem($item);
@@ -143,12 +143,12 @@ class DefaultController extends SimpleController
         $form->bind($item);
         $form->get('submit')->setValue($this->_updateTitle);
         $this->_preUpdateForm($form);
+        $this->_preUpdateItem($item);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->_preUpdateItem($item);
                 $this->getEntityManager()->flush();
                 $this->_postUpdateItem($item);
                 return $this->_redirectBack();
@@ -179,12 +179,12 @@ class DefaultController extends SimpleController
             return $this->_redirectBack();
         }
 
+        $this->_preDeleteItem($item);
         $request = $this->getRequest();
         if ($request->isPost()) {
             $del = $request->getPost('delete', false);
 
             if ($del) {
-                $this->_preDeleteItem($item);
                 $this->getEntityManager()->remove($item);
                 $this->getEntityManager()->flush();
                 $this->_postDeleteItem($item);
