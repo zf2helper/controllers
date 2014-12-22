@@ -156,6 +156,7 @@ class DefaultController extends SimpleController
         }
 
         $view = new ViewModel(array(
+            'item' => $item,
             'form' => $form,
             'title' => $this->_updateTitle
         ));
