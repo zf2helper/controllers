@@ -109,7 +109,8 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->persist($item);
                 $this->getEntityManager()->flush();
                 $this->_postCreateItem($item);
-
+                
+                $this->flashMessenger()->addSuccessMessage('Item created successfully');
                 return $this->_redirectBack();
             }
         }
@@ -151,6 +152,7 @@ class DefaultController extends SimpleController
             if ($form->isValid()) {
                 $this->getEntityManager()->flush();
                 $this->_postUpdateItem($item);
+                $this->flashMessenger()->addSuccessMessage('Item updated successfully');
                 return $this->_redirectBack();
             }
         }
@@ -189,6 +191,7 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->remove($item);
                 $this->getEntityManager()->flush();
                 $this->_postDeleteItem($item);
+                $this->flashMessenger()->addSuccessMessage('Item deleted successfully');
             }
 
             return $this->_redirectBack();
