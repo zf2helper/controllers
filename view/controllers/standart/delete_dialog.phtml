@@ -10,7 +10,7 @@ $field = 'get'.ucfirst($displayName);
             <input type="hidden" name="id" value="<?php echo (int) $item->getId(); ?>" />
             <div class="row">
                 <div class="col-xs-6">
-                    <input class="btn btn-block btn-success" type="submit" name="delete" value<?=$this->translate('Yes')?> />
+                    <input class="btn btn-block btn-success" type="submit" name="delete" value="<?=$this->translate('Yes')?>" />
                 </div>
                 <div class="col-xs-6">
                     <input class="btn btn-block btn-danger" type="submit" name="notdelete" value="<?=$this->translate('No')?>" />
