@@ -18,6 +18,7 @@ class DefaultController extends SimpleController
     protected $_deleteTitle = 'Delete item';
     protected $_deleteDisplyaProperty = 'name';
     protected $_indexView = 'controllers/standart/index';
+    protected $_indexTableId = 'theTable';
     protected $_formView = 'controllers/standart/form';
     protected $_deleteView = 'controllers/standart/delete_dialog';
     protected $_indexViewFields = array(
@@ -87,7 +88,8 @@ class DefaultController extends SimpleController
             'title' => $this->_title,
             'items' => $items,
             'route' => $this->_failRoute,
-            'fields' => $this->_indexViewFields
+            'fields' => $this->_indexViewFields,
+            'tableId' => $this->_indexTableId
         ));
         $view->setTemplate($this->_indexView);
         
