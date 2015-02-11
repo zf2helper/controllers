@@ -11,6 +11,7 @@ class DefaultController extends SimpleController
     protected $_title = 'Title';
     protected $_entity = '';
     protected $_searchParams = array();
+    protected $_searchOrder = array();
     protected $_form = '';
     protected $_failRoute = '';
     protected $_addTitle = 'Add item';
@@ -80,7 +81,7 @@ class DefaultController extends SimpleController
 
         $items = $this->getEntityManager()
                 ->getRepository($this->_entity)
-                ->findBy($this->_searchParams);
+                ->findBy($this->_searchParams,$this->_searchOrder);
 
         $view = new ViewModel(array(
             'addLabel' => $this->_addTitle,
