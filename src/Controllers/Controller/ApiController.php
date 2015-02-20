@@ -69,4 +69,12 @@ abstract class ApiController extends \Zend\Mvc\Controller\AbstractActionControll
         return $baseUrl;
     }
     
+    public function apiResponse($statusCode, $responseCode, $message, $params)
+    {
+        $this->getResponse()->setStatusCode($statusCode);
+        $response = new \V1\Model\Response($responseCode, $message, $params);
+        
+        return $response;
+    }
+    
 }
