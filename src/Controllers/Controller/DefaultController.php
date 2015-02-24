@@ -99,9 +99,9 @@ class DefaultController extends SimpleController
     {
         $item = new $this->_entity();
         $form = new $this->_form($this->getEntityManager());
-        $form->bind($item);
         $this->_preCreateForm($form);
         $this->_preCreateItem($item);
+        $form->bind($item);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -142,10 +142,10 @@ class DefaultController extends SimpleController
         }
 
         $form = new $this->_form($this->getEntityManager());
-        $form->bind($item);
-        $form->get('submit')->setValue($this->_updateTitle);
         $this->_preUpdateForm($form);
         $this->_preUpdateItem($item);
+        $form->bind($item);
+        $form->get('submit')->setValue($this->_updateTitle);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
