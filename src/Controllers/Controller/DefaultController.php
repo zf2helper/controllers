@@ -14,6 +14,9 @@ class DefaultController extends SimpleController
     protected $_searchOrder = array();
     protected $_form = '';
     protected $_failRoute = '';
+    protected $_allowAdd = true;
+    protected $_allowUpdate = true;
+    protected $_allowDelete = true;
     protected $_addTitle = 'Add item';
     protected $_updateTitle = 'Update item';
     protected $_deleteTitle = 'Delete item';
@@ -88,7 +91,12 @@ class DefaultController extends SimpleController
             'title' => $this->_title,
             'items' => $items,
             'route' => $this->_failRoute,
-            'fields' => $this->_indexViewFields
+            'fields' => $this->_indexViewFields,
+            'allow' => array(
+                'add' => $this->_allowAdd,
+                'update' => $this->_allowUpdate,
+                'delete' => $this->_allowDelete,
+            )
         ));
         $view->setTemplate($this->_indexView);
         
@@ -97,6 +105,9 @@ class DefaultController extends SimpleController
 
     public function addAction()
     {
+        if (!$this->_allowAdd){
+            return $this->_redirectBack();
+        }
         $item = new $this->_entity();
         $form = new $this->_form($this->getEntityManager());
         $this->_preCreateForm($form);
@@ -127,6 +138,9 @@ class DefaultController extends SimpleController
 
     public function updateAction()
     {
+        if (!$this->_allowUpdate){
+            return $this->_redirectBack();
+        }
         $id = $this->params()->fromRoute('id', false);
 
         if (!$id) {
@@ -170,6 +184,9 @@ class DefaultController extends SimpleController
 
     public function deleteAction()
     {
+        if (!$this->_allowDelete){
+            return $this->_redirectBack();
+        }
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->_redirectBack();
