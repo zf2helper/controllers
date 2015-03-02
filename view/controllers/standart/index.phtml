@@ -38,7 +38,7 @@ $this->headTitle($title);
                             <?php if ($allow['update']):?>
                             <li><a href="<?=$this->url($route, array('action' => 'update', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-edit"></i> <?=$this->translate('Update')?></a></li>
                             <?php endif;?>
-                            <?php if ($allow['update']):?>
+                            <?php if ($allow['delete']):?>
                             <li><a href="<?=$this->url($route, array('action' => 'delete', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-trash"></i> <?=$this->translate('Delete')?></a></li>
                             <?php endif;?>
                         </ul>
