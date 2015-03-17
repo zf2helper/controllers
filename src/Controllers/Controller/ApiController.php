@@ -6,6 +6,11 @@ use Zend\View\Model\JsonModel;
 
 abstract class ApiController extends \Zend\Mvc\Controller\AbstractActionController
 {
+    public function errorMessage($params = array())
+    {
+        return new JsonModel(array('error' => $params));
+    }
+    
     /**
      * Get entity manager
      * 
