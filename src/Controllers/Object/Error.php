@@ -9,9 +9,13 @@ class Error
         'invalid' => '%s'
     );
     
-    public function __construct($type, $paramName)
+    public function __construct($type, $paramName, $reason = null)
     {
         $message = sprintf($this->messages[$type], $paramName);
         $this->$type = $message;
+        
+        if ($reason){
+            $this->reason = $reason;
+        }
     }
 }
