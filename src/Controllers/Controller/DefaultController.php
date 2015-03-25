@@ -9,6 +9,7 @@ class DefaultController extends SimpleController
 {
 
     protected $_title = 'Title';
+    protected $_itemName = 'Item';
     protected $_entity = '';
     protected $_searchParams = array();
     protected $_searchOrder = array();
@@ -122,7 +123,7 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->flush();
                 $this->_postCreateItem($item);
                 
-                $this->flashMessenger()->addSuccessMessage('Item created successfully');
+                $this->flashMessenger()->addSuccessMessage($this->_itemName . ' created successfully');
                 return $this->_redirectBack();
             }
         }
@@ -167,7 +168,7 @@ class DefaultController extends SimpleController
             if ($form->isValid()) {
                 $this->getEntityManager()->flush();
                 $this->_postUpdateItem($item);
-                $this->flashMessenger()->addSuccessMessage('Item updated successfully');
+                $this->flashMessenger()->addSuccessMessage($this->_itemName . ' updated successfully');
                 return $this->_redirectBack();
             }
         }
@@ -209,7 +210,7 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->remove($item);
                 $this->getEntityManager()->flush();
                 $this->_postDeleteItem($item);
-                $this->flashMessenger()->addSuccessMessage('Item deleted successfully');
+                $this->flashMessenger()->addSuccessMessage($this->_itemName . ' deleted successfully');
             }
 
             return $this->_redirectBack();
