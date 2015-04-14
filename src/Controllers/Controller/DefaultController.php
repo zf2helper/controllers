@@ -155,6 +155,10 @@ class DefaultController extends SimpleController
         } catch (\Exception $ex) {
             return $this->_redirectBack();
         }
+        
+        if (!$item){
+            return $this->_redirectBack();
+        }
 
         $form = new $this->_form($this->getEntityManager());
         $this->_preUpdateForm($form);
@@ -198,6 +202,10 @@ class DefaultController extends SimpleController
                     ->getRepository($this->_entity)
                     ->find($id);
         } catch (\Exception $ex) {
+            return $this->_redirectBack();
+        }
+        
+        if (!$item){
             return $this->_redirectBack();
         }
 
