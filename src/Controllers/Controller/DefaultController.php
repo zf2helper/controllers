@@ -164,7 +164,7 @@ class DefaultController extends SimpleController
         $this->_preUpdateForm($form);
         $this->_preUpdateItem($item);
         $form->bind($item);
-        $form->get('submit')->setValue($this->_updateTitle);
+        $form->get('submit')->setLabel($this->_updateTitle);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
