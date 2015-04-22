@@ -111,9 +111,9 @@ class DefaultController extends SimpleController
         }
         $item = new $this->_entity();
         $form = new $this->_form($this->getEntityManager());
-        $this->_preCreateForm($form);
         $this->_preCreateItem($item);
         $form->bind($item);
+        $this->_preCreateForm($form);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -161,9 +161,9 @@ class DefaultController extends SimpleController
         }
 
         $form = new $this->_form($this->getEntityManager());
-        $this->_preUpdateForm($form);
         $this->_preUpdateItem($item);
         $form->bind($item);
+        $this->_preUpdateForm($form);
         $form->get('submit')->setLabel($this->_updateTitle);
 
         $request = $this->getRequest();
