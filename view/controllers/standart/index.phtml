@@ -1,53 +1,62 @@
 <?php
 $this->headTitle($this->translate($title));
 ?>
-<h3><?=$this->translate($title)?></h3>
-<?php if ($allow['add']):?>
-<a class="btn btn-success pull-right" href="<?=$this->url($route, array('action' => 'add'))?>"><span class="glyphicon glyphicon-plus"></span> <?=$this->translate($addLabel)?></a>
-<?php endif;?>
 <div class="row">
-    <div class="col-lg-12">
-        <h3><?=$this->translate('List')?></h3>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <?php foreach ($fields as $fieldName => $fieldLabel):?>
-                <th><?=$this->translate($fieldLabel)?></th>
-                <?php endforeach;?>
-                <?php if ($allow['update'] || $allow['delete']):?>
-                <th style="width: 80px;"></th>
-                <?php endif;?>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($items as $i):?>
-            <tr>
-                <?php foreach ($fields as $fieldName => $fieldLabel):?>
-                <td><?php
-                    $getter = 'get' . ucfirst($fieldName);
-                    echo $i->$getter();
-                ?></td>
-                <?php endforeach;?>
-                <?php if ($allow['update'] || $allow['delete']):?>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;<?=$this->translate('Actions')?> <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <?php if ($allow['update']):?>
-                            <li><a href="<?=$this->url($route, array('action' => 'update', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-edit"></i> <?=$this->translate('Update')?></a></li>
-                            <?php endif;?>
-                            <?php if ($allow['delete']):?>
-                            <li><a href="<?=$this->url($route, array('action' => 'delete', 'id' => $i->getId()))?>"><i class="glyphicon glyphicon-trash"></i> <?=$this->translate('Delete')?></a></li>
-                            <?php endif;?>
-                        </ul>
+    <div class="col-lg-10 col-lg-offset-1">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-6"><h4><?= $this->translate($title) ?></h4></div>
+                    <div class="col-lg-6">
+                        <?php if ($allow['add']): ?>
+                            <a class="btn btn-success pull-right" href="<?= $this->url($route, array('action' => 'add')) ?>"><span class="glyphicon glyphicon-plus"></span> New</a>
+                        <?php endif; ?>
                     </div>
-                </td>
-                <?php endif;?>
-            </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+                </div>
+            </header>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <?php foreach ($fields as $fieldName => $fieldLabel): ?>
+                                <th><?= $this->translate($fieldLabel) ?></th>
+                            <?php endforeach; ?>
+                            <?php if ($allow['update'] || $allow['delete']): ?>
+                                <th style="width: 80px;"></th>
+                            <?php endif; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($items as $i): ?>
+                            <tr>
+                                <?php foreach ($fields as $fieldName => $fieldLabel): ?>
+                                    <td><?php
+                                        $getter = 'get' . ucfirst($fieldName);
+                                        echo $i->$getter();
+                                        ?></td>
+                                <?php endforeach; ?>
+                                <?php if ($allow['update'] || $allow['delete']): ?>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;<?= $this->translate('Actions') ?> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <?php if ($allow['update']): ?>
+                                                    <li><a href="<?= $this->url($route, array('action' => 'update', 'id' => $i->getId())) ?>"><i class="glyphicon glyphicon-edit"></i> <?= $this->translate('Update') ?></a></li>
+                                                <?php endif; ?>
+                                                <?php if ($allow['delete']): ?>
+                                                    <li><a href="<?= $this->url($route, array('action' => 'delete', 'id' => $i->getId())) ?>"><i class="glyphicon glyphicon-trash"></i> <?= $this->translate('Delete') ?></a></li>
+                                                    <?php endif; ?>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                <?php endif; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </div>
