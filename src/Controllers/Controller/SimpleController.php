@@ -25,6 +25,16 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
         return $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
     }
     
+    public function getViewHelper($helperName)
+    {
+        return $this->getServiceLocator()->get('viewhelpermanager')->get($helperName);
+    }
+    
+    public function getBasePath()
+    {
+        $this->getViewHelper('BasePath');
+    }
+
     /**
      * Auth user
      * 
