@@ -31,9 +31,9 @@ class DefaultController extends SimpleController
 
     protected function _preSearchParams($params)
     {
-
+        
     }
-    
+
     protected function _preCreateForm($form)
     {
         
@@ -41,51 +41,66 @@ class DefaultController extends SimpleController
 
     protected function _preCreateItem($entity)
     {
-
+        
     }
 
     protected function _postCreateItem($entity)
     {
-
+        
     }
-    
+
     protected function _preUpdateForm($form)
     {
         
-    }    
+    }
 
     protected function _preUpdateItem($entity)
     {
-
+        
     }
 
     protected function _postUpdateItem($entity)
     {
-
+        
     }
 
     protected function _preDeleteItem($entity)
     {
-
+        
     }
 
     protected function _postDeleteItem($entity)
     {
-
+        
     }
 
     protected function _redirectBack()
     {
         return $this->redirect()->toRoute($this->_failRoute);
     }
-    
+
+    protected function _paramsIndex($view)
+    {
+        
+    }
+
+    protected function _paramsAdd($view)
+    {
+        
+    }
+
+    protected function _paramsUpdate($view)
+    {
+        
+    }
+
     public function indexAction()
     {
         $this->_preSearchParams($this->_searchParams);
 
         $items = $this->getEntityManager()
                 ->getRepository($this->_entity)
-                ->findBy($this->_searchParams,$this->_searchOrder);
+                ->findBy($this->_searchParams, $this->_searchOrder);
 
         $view = new ViewModel(array(
             'addLabel' => $this->_addTitle,
@@ -99,14 +114,16 @@ class DefaultController extends SimpleController
                 'delete' => $this->_allowDelete,
             )
         ));
+
+        $this->_paramsIndex($view);
         $view->setTemplate($this->_indexView);
-        
+
         return $view;
     }
 
     public function addAction()
     {
-        if (!$this->_allowAdd){
+        if (!$this->_allowAdd) {
             return $this->_redirectBack();
         }
         $item = new $this->_entity();
@@ -122,12 +139,13 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->persist($item);
                 $this->getEntityManager()->flush();
                 $this->_postCreateItem($item);
-                
+
                 $this->flashMessenger()->addSuccessMessage($this->_itemName . ' created successfully');
                 return $this->_redirectBack();
             }
         }
 
+        $this->_paramsAdd($view);
         $view = new ViewModel(array(
             'form' => $form,
             'title' => $this->_addTitle
@@ -139,7 +157,7 @@ class DefaultController extends SimpleController
 
     public function updateAction()
     {
-        if (!$this->_allowUpdate){
+        if (!$this->_allowUpdate) {
             return $this->_redirectBack();
         }
         $id = $this->params()->fromRoute('id', false);
@@ -155,8 +173,8 @@ class DefaultController extends SimpleController
         } catch (\Exception $ex) {
             return $this->_redirectBack();
         }
-        
-        if (!$item){
+
+        if (!$item) {
             return $this->_redirectBack();
         }
 
@@ -182,6 +200,7 @@ class DefaultController extends SimpleController
             'form' => $form,
             'title' => $this->_updateTitle
         ));
+        $this->_paramsUpdate($view);
         $view->setTemplate($this->_formView);
 
         return $view;
@@ -189,7 +208,7 @@ class DefaultController extends SimpleController
 
     public function deleteAction()
     {
-        if (!$this->_allowDelete){
+        if (!$this->_allowDelete) {
             return $this->_redirectBack();
         }
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -204,8 +223,8 @@ class DefaultController extends SimpleController
         } catch (\Exception $ex) {
             return $this->_redirectBack();
         }
-        
-        if (!$item){
+
+        if (!$item) {
             return $this->_redirectBack();
         }
 
