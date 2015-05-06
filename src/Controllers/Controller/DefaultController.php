@@ -145,11 +145,11 @@ class DefaultController extends SimpleController
             }
         }
 
-        $this->_paramsAdd($view);
         $view = new ViewModel(array(
             'form' => $form,
             'title' => $this->_addTitle
         ));
+        $this->_paramsAdd($view);
         $view->setTemplate($this->_formView);
 
         return $view;
