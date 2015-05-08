@@ -1,21 +1,24 @@
 <?php
 $this->headTitle($title);
-$field = 'get'.ucfirst($displayName);
+$field = 'get' . ucfirst($displayName);
 ?>
 <div class="row">
     <div class="col-lg-4 col-md-6 col-xs-12 col-lg-offset-4 col-md-offset-3">
-        <h3><?php echo $this->translate($this->escapeHtml($title)); ?></h3>
-        <p><?=$this->translate('Are you shure you want to delete')?> '<?php echo $this->translate($this->escapeHtml($item->$field())); ?>' ?</p>
-        <form method="post">
-            <input type="hidden" name="id" value="<?php echo (int) $item->getId(); ?>" />
-            <div class="row">
-                <div class="col-xs-6">
-                    <input class="btn btn-block btn-success" type="submit" name="delete" value="<?=$this->translate('Yes')?>" />
-                </div>
-                <div class="col-xs-6">
-                    <input class="btn btn-block btn-danger" type="submit" name="notdelete" value="<?=$this->translate('No')?>" />
-                </div>
+        <section class="panel">
+            <header class="panel-heading"><?php echo $this->translate($this->escapeHtml($title)); ?></header>
+            <div class="panel-body">
+                <p><?= $this->translate('Are you shure you want to delete') ?> '<?php echo $this->translate($this->escapeHtml($item->$field())); ?>' ?</p>
+                <form method="post">
+                    <input type="hidden" name="id" value="<?php echo (int) $item->getId(); ?>" />
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input class="btn btn-block btn-success" type="submit" name="delete" value="<?= $this->translate('Yes') ?>" />
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="btn btn-block btn-danger" type="submit" name="notdelete" value="<?= $this->translate('No') ?>" />
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
     </div>
 </div>
