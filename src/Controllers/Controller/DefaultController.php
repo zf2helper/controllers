@@ -49,7 +49,7 @@ class DefaultController extends SimpleController
         
     }
 
-    protected function _preUpdateForm($form, $item)
+    protected function _preUpdateForm($form, $item = null)
     {
         
     }
