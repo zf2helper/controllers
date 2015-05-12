@@ -15,6 +15,7 @@ class DefaultController extends SimpleController
     protected $_searchOrder = array();
     protected $_form = '';
     protected $_failRoute = '';
+    protected $_toUpdate = false;
     protected $_allowAdd = true;
     protected $_allowUpdate = true;
     protected $_allowDelete = true;
@@ -39,12 +40,12 @@ class DefaultController extends SimpleController
         
     }
 
-    protected function _preCreateItem($entity)
+    protected function _preCreateItem($item)
     {
         
     }
 
-    protected function _postCreateItem($entity)
+    protected function _postCreateItem($item)
     {
         
     }
@@ -54,29 +55,33 @@ class DefaultController extends SimpleController
         
     }
 
-    protected function _preUpdateItem($entity)
+    protected function _preUpdateItem($item)
     {
         
     }
 
-    protected function _postUpdateItem($entity)
+    protected function _postUpdateItem($item)
     {
         
     }
 
-    protected function _preDeleteItem($entity)
+    protected function _preDeleteItem($item)
     {
         
     }
 
-    protected function _postDeleteItem($entity)
+    protected function _postDeleteItem($item)
     {
         
     }
 
-    protected function _redirectBack()
+    protected function _redirectBack($item = null)
     {
-        return $this->redirect()->toRoute($this->_failRoute);
+        if ($this->_toUpdate){ 
+            return $this->redirect()->toRoute($this->_failRoute, array('action' => 'update', 'id' => $item->getId()));
+        } else {
+            return $this->redirect()->toRoute($this->_failRoute);
+        }
     }
 
     protected function _paramsIndex($view)
@@ -141,7 +146,7 @@ class DefaultController extends SimpleController
                 $this->_postCreateItem($item);
 
                 $this->flashMessenger()->addSuccessMessage($this->_itemName . ' created successfully');
-                return $this->_redirectBack();
+                return $this->_redirectBack($item);
             }
         }
 
@@ -191,7 +196,7 @@ class DefaultController extends SimpleController
                 $this->getEntityManager()->flush();
                 $this->_postUpdateItem($item);
                 $this->flashMessenger()->addSuccessMessage($this->_itemName . ' updated successfully');
-                return $this->_redirectBack();
+                return $this->_redirectBack($item);
             }
         }
 
