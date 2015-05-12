@@ -49,7 +49,7 @@ class DefaultController extends SimpleController
         
     }
 
-    protected function _preUpdateForm($form)
+    protected function _preUpdateForm($form, $item)
     {
         
     }
@@ -181,7 +181,7 @@ class DefaultController extends SimpleController
         $form = new $this->_form($this->getEntityManager());
         $this->_preUpdateItem($item);
         $form->bind($item);
-        $this->_preUpdateForm($form);
+        $this->_preUpdateForm($form, $item);
         $form->get('submit')->setLabel($this->_updateTitle);
 
         $request = $this->getRequest();
