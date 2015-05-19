@@ -42,6 +42,9 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
      */
     public function auth($username, $password)
     {
+        if ($username === '') {
+            return false;
+        }
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         $adapter = $authService->getAdapter();
         $adapter->setIdentityValue($username);
