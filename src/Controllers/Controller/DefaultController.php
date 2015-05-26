@@ -94,7 +94,7 @@ class DefaultController extends SimpleController
         
     }
 
-    protected function _paramsUpdate($view)
+    protected function _paramsUpdate($view, $form)
     {
         
     }
@@ -205,7 +205,7 @@ class DefaultController extends SimpleController
             'form' => $form,
             'title' => $this->_updateTitle
         ));
-        $this->_paramsUpdate($view);
+        $this->_paramsUpdate($view, $form);
         $view->setTemplate($this->_formView);
 
         return $view;
