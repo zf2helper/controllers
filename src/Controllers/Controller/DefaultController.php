@@ -132,7 +132,7 @@ class DefaultController extends SimpleController
             return $this->_redirectBack();
         }
         $item = new $this->_entity();
-        $form = new $this->_form($this->getEntityManager());
+        $form = new $this->_form($this->getEntityManager(), $this->identity());
         $this->_preCreateItem($item);
         $form->bind($item);
         $this->_preCreateForm($form);
@@ -183,7 +183,7 @@ class DefaultController extends SimpleController
             return $this->_redirectBack();
         }
 
-        $form = new $this->_form($this->getEntityManager());
+        $form = new $this->_form($this->getEntityManager(), $this->identity());
         $this->_preUpdateItem($item);
         $form->bind($item);
         $this->_preUpdateForm($form, $item);
