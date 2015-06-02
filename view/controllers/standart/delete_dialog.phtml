@@ -7,7 +7,7 @@ $field = 'get' . ucfirst($displayName);
         <section class="panel">
             <header class="panel-heading"><?php echo $this->translate($this->escapeHtml($title)); ?></header>
             <div class="panel-body">
-                <p><?= $this->translate('Are you shure you want to delete') ?> '<?php echo $this->translate($this->escapeHtml($item->$field())); ?>' ?</p>
+                <p><?= $this->translate('Are you sure you want to delete') ?> '<?php echo $this->translate($this->escapeHtml($item->$field())); ?>' ?</p>
                 <form method="post">
                     <input type="hidden" name="id" value="<?php echo (int) $item->getId(); ?>" />
                     <div class="row">
