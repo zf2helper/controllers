@@ -4,6 +4,19 @@ namespace Controllers\Controller;
 
 abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionController
 {
+    private $entityManager = null;
+    private $authService = null;
+
+
+    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function setAuthService(\Zend\Authentication\AuthenticationServiceInterface $authService) {
+        $this->authService = $authService;
+    }
+
     /**
      * Get base host uri from request
      * @return string Base url
@@ -22,7 +35,21 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
      */
     public function getEntityManager()
     {
-        return $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        return $this->entityManager;
+    }
+
+    public function getAuthService()
+    {
+        return $this->authService;
+    }
+
+    /**
+     * Set entity manager
+     *
+     */
+    public function setEntityManager(\Doctrine\ORM\EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
     
     public function getViewHelper($helperName)
@@ -45,10 +72,14 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
         if ($username === '') {
             return false;
         }
-        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-        $adapter = $authService->getAdapter();
-        $adapter->setIdentityValue($username);
-        $adapter->setCredentialValue(md5($password));
+
+        if ($this->getAuthService() === null) {
+            return false;
+        }
+        $authService = $this->getAuthService();
+        $adapter = $this->getAuthService()->getAdapter();
+        $adapter->setIdentity($username);
+        $adapter->setCredential(md5($password));
         $authResult = $authService->authenticate();
 
         if ($authResult->isValid()) {
@@ -66,7 +97,7 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
      */
     public function getAuth()
     {
-        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $authService = $this->getAuthService();
         $loggedUser = $authService->getIdentity();
 
         return $loggedUser;
@@ -74,7 +105,7 @@ abstract class SimpleController extends \Zend\Mvc\Controller\AbstractActionContr
 
     public function logout()
     {
-        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $authService = $this->getAuthService();
         $authService->clearIdentity();
     }    
 
